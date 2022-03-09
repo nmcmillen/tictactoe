@@ -23,9 +23,9 @@ The game continues until one player places three symbols in a straight line (hor
 ## Model View Controller
 1. Model (stores data, communicates to controller)
     - Shows who the current player is. X or O. Should start as X.
-    - Stores the board information of empty array of 9 (maybe a blank string for earch). Updated by Controller 
+    - Stores the board information of empty array of 9 (maybe a blank string for earch). Updated by Controller.
     - Stores the set of winning conditions that will be accessed by the Controller when function to check for winning conditions is invoked
-    - End Game should be set to false. Controller will change this when winning conditions met
+    - End Game should be set to false. Controller will change this when winning conditions met which should invoke an end game function.
 
 2. View (handles display, communicates to controller)
     - Renders the board model
@@ -49,21 +49,46 @@ The game continues until one player places three symbols in a straight line (hor
         - Set endgame false. Unsure if we want it done this way yet.
 
 
-## How Many Ways To Win
-- set up as an array within an array [0,1,2] for win conditions
-- 8 possible wins
-
-
 constants(constance?) singleton file 
 
 
 # OBJECTS AND WHAT THEY DO
-- Model
-    1. currentPlayer: X or O
-    2. setBoard: array of 9 []
-    3. WIN_CONDITIONS: array of win conditions
-    4. endGame: true when win conditions are met
+- Model (TicTacToe)
+    1. currentPlayer(): X or O (format something like "X ? O : X")
+    2. setBoard(): array of 9 []
+    3. WINNING_CONDITIONS: set the array of win conditions to a const
+    4. endGame(): true when win conditions are met
     5. turn counter: keeps track of turns
 
+- View (gameView)
+    1. render(): renders content on the page for starting game
+    2. addEventListener: add event listener to the cells
+    3. updateCells(): update the cells view
+    4. addEventListener: add to restart button to restart
+    5. newGame(): restarts new game. don't need new function I don't think
+    6. displayWinner(): displays winner message
+    7. displayTie(): displays tie game message
+
 - Controller
-    1. tileClick(): 
+    1. tileClick()
+        - updates the Model
+        - "i" is the clicked tile
+        - Board [i] = current players symbol
+        - Show symbol in the view
+        - remove event listener for tile [i]
+    2. compare()
+        - if (currentPlayer = 'X') {
+            currentPlayer = 'O'{
+                else
+            }
+        }
+    3. endGame(): may be able to go in Model instead as listed already
+        - make pop up to display winner
+        - lock down all buttons
+        - direct user to reset button or start new game
+        - add to player "blank's" score (stretch goal)
+    4. resetGame()
+        - set Model to default state
+        - updateView
+        - remove win/tie pop-up
+        - unlock all buttons (not sure needed if just resetting everything)

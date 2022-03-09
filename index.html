@@ -8,21 +8,22 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="board" id="board">
-        <div class="grid-cell" data-value="0"></div>
-        <div class="grid-cell" data-value="1"></div>
-        <div class="grid-cell" data-value="2"></div>
+    <div class="board" id="game">
+        <div class="grid-cell" data-value="0">0</div>
+        <div class="grid-cell" data-value="1">1</div>
+        <div class="grid-cell" data-value="2">2</div>
         <div class="grid-cell" data-value="3"></div>
         <div class="grid-cell" data-value="4"></div>
         <div class="grid-cell" data-value="5"></div>
         <div class="grid-cell" data-value="6"></div>
         <div class="grid-cell" data-value="7"></div>
         <div class="grid-cell" data-value="8"></div>
-        </div>
-        <div class="winning-message" id="winningMessage">
-            <div id="winningMessageText"></div>
-            <button id="restartButton">Restart</button>
-        </div>
-</body>
+    </div>
+    <div class="game-controls">
+        <div id="win-message">Win Message</div>
+        <button id="restart-button">Restart</button>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
