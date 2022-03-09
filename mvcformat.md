@@ -34,3 +34,13 @@ Controller
     - switch the persons turn
 - Run reset function
     - Set endgame false
+
+
+
+    // function checkWin(currentClass) {
+//     return WINNING_COMBINATIONS.some(combination => {
+//       return combination.every(index => {
+//         return cellElements[index].classList.contains(currentClass)
+//       })
+//     })
+//   }

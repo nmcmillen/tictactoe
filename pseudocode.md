@@ -57,6 +57,7 @@ constants(constance?) singleton file
     1. currentPlayer(): X or O (format something like "X ? O : X")
     2. setBoard(): array of 9 []
     3. WINNING_CONDITIONS: set the array of win conditions to a const
+        **thought process on how to match winning conditions
     4. endGame(): true when win conditions are met
     5. turn counter: keeps track of turns
 
@@ -92,3 +93,9 @@ constants(constance?) singleton file
         - updateView
         - remove win/tie pop-up
         - unlock all buttons (not sure needed if just resetting everything)
+
+
+
+
+        **get winning conditions done
+        **how to remove event listener or not do anything once box clicked
