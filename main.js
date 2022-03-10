@@ -4,6 +4,8 @@ function restartTest() {
   alert('button works')
 }
 
+
+
 const WINNING_CONDITIONS = [
     // Horizontal
       [0, 1, 2],
@@ -110,12 +112,12 @@ class GameController {
 
     }
 
-    restartGame(model) {
-      this.currentPlayer = model.getCurrentPlayer();
-      this.gameBoard = model.getGameBoard();
-      this.endGame = model.getEndGame();
-      this.turnCounter = model.getTurnCounter();
-  }
+  //   restartGame(model) {
+  //     this.currentPlayer = model.getCurrentPlayer();
+  //     this.gameBoard = model.getGameBoard();
+  //     this.endGame = model.getEndGame();
+  //     this.turnCounter = model.getTurnCounter();
+  // }
 
     
     // TODO
@@ -142,9 +144,12 @@ class GameController {
   // }
 
 
-  // checkWin() {
-  //   let winningPlayer = WINNING_CONDITIONS.some((inline) => {
-  //     let winArray = [this.board[inline[0]], this.board[inline[1]], this.board[inline[2]]]
-  //     return winArray
-  //   })
-  // }
+  checkWin() {
+    let winningPlayer = WINNING_CONDITIONS.some((inline) => {
+      // [this.board[inline[0]]this.board[inline[1]], this.board[inline[2]]]
+      this.gameBoard[inline[0]] &&
+      this.gameBoard[inline[0]] === this.gameBoard[inline[1]] &&
+      this.gameBoard[inline[1]] === this.gameBoard[inline[2]]
+    })
+    return winningPlayer
+  }
