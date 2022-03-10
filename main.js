@@ -1,9 +1,5 @@
 console.log('hello tictactoe')
 
-function restartTest() {
-  alert('button works')
-}
-
 const WINNING_CONDITIONS = [
     // Horizontal
       [0, 1, 2],
@@ -34,9 +30,10 @@ class TicTacToe {
           this.gameBoard[inline[0]] === this.gameBoard[inline[1]] &&
           this.gameBoard[inline[1]] === this.gameBoard[inline[2]]) {
             // console.log(this.gameBoard[inline[0]])
-              alert(`${this.currentPlayer} wins`)
-                  return true
-              }
+            console.log(`${this.currentPlayer} wins!`)
+            alert(`${this.currentPlayer} wins!`)
+              return true
+          }
       })
     }
 
@@ -71,8 +68,6 @@ class TicTacToe {
     getTurnCounter() {
         return this.turnCounter;
     }
-
-
 }
 
 
@@ -82,14 +77,23 @@ class GameView {
     this.cells = document.querySelectorAll(".grid-cell");
     this.winMessage = document.getElementById("win-message");
     this.drawMessage = document.getElementById("draw-message");
-    this.restartGame = document.getElementById("restart-button");
+    this.restartButton = document.getElementById("restart-button");
+    // this.currentPlayer = document.getElementById("current-player")
     console.log(this.cells);
   }
 
-  // this.restartGame.addEventListener("click", restartGame());
+  resetBoard = () => {
+    this.cells.forEach ((cell, i) => {
+      cell.innerText = ''
+    })
+    console.log("reset render")
+    this.render()
+  }
   
-  render(model) {
+  render(model, resetGame) {
     // @TODO: create element div for the grid here
+
+    this.restartButton.addEventListener("click", resetGame);
 
     // Block of code to place and modify the grid cells with X's and O's
     this.cells = Array.from(this.cells);
@@ -97,10 +101,11 @@ class GameView {
       cell.addEventListener("click", () => {
           // appends innertext to player's symbol
           cell.innerText = model.currentPlayer;
+          console.log('this is cell', i)
           model.setGameBoard(i);
           model.checkWin(); // CHECKING THISSSSSS
           model.switchCurrentPlayer();
-          console.log('this is cell', i)
+          document.getElementById("current-player").innerHTML = `Current Player: ${model.currentPlayer}`;
         },
         {
           // only allows cell to be clicked once and turns off eventlistener
@@ -109,7 +114,6 @@ class GameView {
       );
     }); 
   }
-
 }
 
 
@@ -119,40 +123,27 @@ class GameController {
         this.model = model;
         this.view = view;
         console.log(this.view)
-        this.view.render(this.model);
+        this.view.render(this.model, this.resetGame);
 
     }
 
-  //   restartGame(model) {
-  //     this.currentPlayer = model.getCurrentPlayer();
-  //     this.gameBoard = model.getGameBoard();
-  //     this.endGame = model.getEndGame();
-  //     this.turnCounter = model.getTurnCounter();
-  // }
+    resetGame = () => {
+      this.model.currentPlayer = 'X';
+      this.model.gameBoard = ["","","","","","","","",""];
+      this.model.endGame = false;
+      this.model.turnCounter = 0;
+      this.view.resetBoard()
+    }
 
-    
+    // displayPlayer(
+    //   this.model.currentPlayer
+    // )
+
     // TODO
     // - Create restart game function
     // - Create winning message function
     // - Create draw message function
-    // - 
-    
-    
     
   }
   
   new GameController(new TicTacToe(), new GameView());
-
-
-
-
-//   function checkWin() {
-//     WINNING_CONDITIONS.some((inline) => {
-//         if( gameBoard[inline[0]] &&
-//             gameBoard[inline[0]] === gameBoard[inline[1]] &&
-//             gameBoard[inline[1]] === gameBoard[inline[2]]) {
-//                 gameBoard[inline[0]]
-//                 return true
-//             }
-//     })
-// }
