@@ -91,3 +91,45 @@ function checkWinner(result) {
   return result.includes(6) && result.includes(3) && result.includes(0);
 }
 </script> */}
+
+
+// //
+// Block of code to place and modify the grid cells with X's and O's
+// let cells = document.querySelectorAll('.grid-cell') //view
+// cells = Array.from(cells) //unsure
+
+// let currentPlayer = 'X' //model?
+
+// // controller
+// cells.forEach(cell => {
+//     cell.addEventListener('click', () => {
+//         // appends innertext to player's symbol
+//         cell.innerText = currentPlayer
+//         currentPlayer = currentPlayer == 'X' ? 'O' : 'X'
+//     },{
+//         // only allows cell to be clicked once and turns off eventlistener
+//         once:true
+//     })
+// })
+// End block of code for X and O placement
+// //
+
+function drawBoard()
+{
+    let parent = document.getElementById("game");
+    let counter = 1;
+
+    for (let i = 0; i < 3; i++)
+    {
+        let row = document.createElement("tr");
+
+        for(let x = 0; x < size; x++)
+        {
+            let col = document.createElement("td");
+            col.innerHTML = counter;
+
+            row.appendChild(col);
+        }
+        parent.appendChild(row);
+    }
+}

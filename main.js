@@ -1,5 +1,9 @@
 console.log('hello tictactoe')
 
+function restartTest() {
+  alert('button works')
+}
+
 const WINNING_CONDITIONS = [
     // Horizontal
       [0, 1, 2],
@@ -32,8 +36,8 @@ class TicTacToe {
         return this.currentPlayer;
     }
 
-    setGameBoard(x) {
-        this.gameBoard = x;
+    setGameBoard(i) {
+        this.gameBoard[i] = this.currentPlayer;
     }
 
     getGameBoard() {
@@ -63,59 +67,37 @@ class TicTacToe {
 // **VIEW**
 class GameView {
   constructor() {
-    this.cells = document.querySelectorAll(".grid-cell"); //how to convert the working code for this into MVC???
-    // this.updateCells = unsure; //same as the .cells???
+    this.cells = document.querySelectorAll(".grid-cell");
     this.winMessage = document.getElementById("win-message");
     this.drawMessage = document.getElementById("draw-message");
     this.restartGame = document.getElementById("restart-button");
     console.log(this.cells);
   }
 
+  // this.restartGame.addEventListener("click", restartGame());
+  
   render(model) {
     // @TODO: create element div for the grid here
 
-    // //
     // Block of code to place and modify the grid cells with X's and O's
-    this.cells = Array.from(this.cells); //unsure
-
-    // controller
-    this.cells.forEach((cell) => {
+    this.cells = Array.from(this.cells);
+    this.cells.forEach((cell, i) => {
       cell.addEventListener("click", () => {
           // appends innertext to player's symbol
           cell.innerText = model.currentPlayer;
+          model.setGameBoard(i);  
           model.switchCurrentPlayer();
+          console.log('this is cell', i)
         },
         {
           // only allows cell to be clicked once and turns off eventlistener
           once: true,
         }
       );
-    });
-    // End block of code for X and O placement
-    // //
+    }); 
   }
+
 }
-
-// //
-// Block of code to place and modify the grid cells with X's and O's
-// let cells = document.querySelectorAll('.grid-cell') //view
-// cells = Array.from(cells) //unsure
-
-// let currentPlayer = 'X' //model?
-
-// // controller
-// cells.forEach(cell => {
-//     cell.addEventListener('click', () => {
-//         // appends innertext to player's symbol
-//         cell.innerText = currentPlayer
-//         currentPlayer = currentPlayer == 'X' ? 'O' : 'X'
-//     },{
-//         // only allows cell to be clicked once and turns off eventlistener
-//         once:true
-//     })
-// })
-// End block of code for X and O placement
-// //
 
 
 // **CONTROLLER
@@ -128,8 +110,41 @@ class GameController {
 
     }
 
+    restartGame(model) {
+      this.currentPlayer = model.getCurrentPlayer();
+      this.gameBoard = model.getGameBoard();
+      this.endGame = model.getEndGame();
+      this.turnCounter = model.getTurnCounter();
+  }
+
+    
+    // TODO
+    // - Create restart game function
+    // - Create winning message function
+    // - Create draw message function
+    // - 
+    
+    
+    
+  }
+  
+  new GameController(new TicTacToe(), new GameView());
 
 
-}
 
-new GameController(new TicTacToe(), new GameView());
+
+  // checkWin() {
+  //   return WINNING_CONDITIONS.some(combination => {
+  //     return combination.every(index => {
+  //       return this.currentPlayer[index].classList.contains(model)
+  //     })
+  //   })
+  // }
+
+
+  // checkWin() {
+  //   let winningPlayer = WINNING_CONDITIONS.some((inline) => {
+  //     let winArray = [this.board[inline[0]], this.board[inline[1]], this.board[inline[2]]]
+  //     return winArray
+  //   })
+  // }

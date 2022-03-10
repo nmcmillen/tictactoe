@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="board" id="game">
-        <div class="grid-cell" data-value="0">0</div>
-        <div class="grid-cell" data-value="1">1</div>
-        <div class="grid-cell" data-value="2">2</div>
+        <div class="grid-cell" data-value="0"></div>
+        <div class="grid-cell" data-value="1"></div>
+        <div class="grid-cell" data-value="2"></div>
         <div class="grid-cell" data-value="3"></div>
         <div class="grid-cell" data-value="4"></div>
         <div class="grid-cell" data-value="5"></div>
@@ -22,7 +22,7 @@
     <div class="game-controls">
         <div id="win-message">Someone Wins!</div>
         <div id="draw-message">It's a Draw!</div>
-        <button id="restart-button">Restart</button>
+        <button id="restart-button" onclick="alertButton()">Restart</button>
     </div>
 
     <script src="main.js"></script>
