@@ -4,8 +4,6 @@ function restartTest() {
   alert('button works')
 }
 
-
-
 const WINNING_CONDITIONS = [
     // Horizontal
       [0, 1, 2],
@@ -28,6 +26,18 @@ class TicTacToe {
         this.endGame = false;
         this.turnCounter = 0;
         console.log(this)
+    }
+
+    checkWin() {
+      WINNING_CONDITIONS.some((inline) => {
+        if(this.gameBoard[inline[0]] &&
+          this.gameBoard[inline[0]] === this.gameBoard[inline[1]] &&
+          this.gameBoard[inline[1]] === this.gameBoard[inline[2]]) {
+            // console.log(this.gameBoard[inline[0]])
+              alert(`${this.currentPlayer} wins`)
+                  return true
+              }
+      })
     }
 
     switchCurrentPlayer() {
@@ -87,7 +97,8 @@ class GameView {
       cell.addEventListener("click", () => {
           // appends innertext to player's symbol
           cell.innerText = model.currentPlayer;
-          model.setGameBoard(i);  
+          model.setGameBoard(i);
+          model.checkWin(); // CHECKING THISSSSSS
           model.switchCurrentPlayer();
           console.log('this is cell', i)
         },
@@ -135,21 +146,13 @@ class GameController {
 
 
 
-  // checkWin() {
-  //   return WINNING_CONDITIONS.some(combination => {
-  //     return combination.every(index => {
-  //       return this.currentPlayer[index].classList.contains(model)
-  //     })
-  //   })
-  // }
-
-
-  checkWin() {
-    let winningPlayer = WINNING_CONDITIONS.some((inline) => {
-      // [this.board[inline[0]]this.board[inline[1]], this.board[inline[2]]]
-      this.gameBoard[inline[0]] &&
-      this.gameBoard[inline[0]] === this.gameBoard[inline[1]] &&
-      this.gameBoard[inline[1]] === this.gameBoard[inline[2]]
-    })
-    return winningPlayer
-  }
+//   function checkWin() {
+//     WINNING_CONDITIONS.some((inline) => {
+//         if( gameBoard[inline[0]] &&
+//             gameBoard[inline[0]] === gameBoard[inline[1]] &&
+//             gameBoard[inline[1]] === gameBoard[inline[2]]) {
+//                 gameBoard[inline[0]]
+//                 return true
+//             }
+//     })
+// }
