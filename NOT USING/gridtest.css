@@ -1,0 +1,43 @@
+body {
+  background-color: rgb(255, 107, 107);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+
+.game-board {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+}
+
+.grid-cell {
+  border: 1px solid #000;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  background-color: white;
+  font-size: 80px;
+  text-align: center;
+  line-height: 100px;
+}
+
+.grid-cell:hover {
+  background-color: yellow;
+}
+
+
+.game-controls {
+  position: absolute;
+  top: 70%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}
+
+.game-title {
+  text-align: center;
+  padding: 5rem;
+}
