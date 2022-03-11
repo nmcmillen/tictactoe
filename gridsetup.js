@@ -19,18 +19,9 @@ function drawBoard() {
     //create board
     for (let i = 1; i <= 9; i++){
      let newDiv = document.createElement("div");
-      newDiv.classList.add("cell");
+      newDiv.classList.add("grid-cell");
      let grid = document.getElementById("game");
       grid.appendChild(newDiv);
-   
-     newDiv.addEventListener('click', event => {
-       const target = event.target;
-        let playerLabel = target;
-        playerLabel.textContent = player;
-       //  target.appendChild(playerLabel);
-       playerChange();
-       }, { once: true });
-    }
    }
 
 drawBoard();

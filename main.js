@@ -32,6 +32,7 @@ class TicTacToe {
             console.log(`${this.currentPlayer} wins!`)
             alert(`${this.currentPlayer} wins!`)
               return true
+              // need to add something to fire off and change endGame to true and populate lock the board and win message
           }
       })
     }
@@ -80,10 +81,25 @@ class GameView {
   }
 
   init(resetGame) {
+    // @TODO: create element div for the grid here
+    // TITLE
     let gameTitle = document.createElement("h1");
-    gameTitle.classList = "game-title"
+    gameTitle.classList = "game-title";
     gameTitle.innerText = "TIC TAC TOE";
     document.body.appendChild(gameTitle);
+
+    // let playerStatus = document.createElement("p");
+    // playerStatus.classList = "player-status";
+    // playerStatus.innerText = "Current Player: ABC";
+    // document.body.appendChild(playerStatus);
+
+    // GRID (not connecting to this.cells)
+    // for (let i = 1; i <= 9; i++){
+    //   let gamegrid = document.createElement("div");
+    //   gamegrid.classList = "grid-cell";
+    //   let grid = document.getElementById("game");
+    //   grid.appendChild(gamegrid);
+    //  }
 
     this.cells = Array.from(this.cells);
     
@@ -91,10 +107,6 @@ class GameView {
   }
   
   render(handleClick) {
-    // @TODO: create element div for the grid here
-    // title
-
-
     // Block of code to place and modify the grid cells with X's and O's
     this.cells.forEach((cell, i) => {
       // only allows cell to be clicked once and turns off eventlistener
@@ -117,10 +129,15 @@ class GameController {
     // need to remove the event listener on cells (this.something.cells removeeventlistener)
 
     resetGame = () => {
-      this.model.currentPlayer = 'X'; // these should use setters, this.model.setPlayer('') 
+      // this.model.currentPlayer = 'X'; // these should use setters, this.model.setPlayer('')
+      this.model.switchCurrentPlayer();
       this.model.gameBoard = ["","","","","","","","",""]; // these should use setters
       this.model.endGame = false; // these should use setters
       this.view.resetBoard(this.handleClick);
+
+      // this.view.cells.removeEventListener("click", something here)
+
+      console.log(this.view.cells)
     }
 
     handleClick = (e, i) => {
@@ -130,8 +147,8 @@ class GameController {
       this.model.setGameBoard(i);
       this.model.checkWin();
       this.model.switchCurrentPlayer();
-      //document.getElementsByClassName("game-title").innerText = `Current Player: ${model.currentPlayer}`;
-      document.getElementById("current-player").innerHTML = `Current Player: ${this.model.currentPlayer}`;
+      // document.getElementsByClassName("player-status").innerHTML = `Current Player: ${model.currentPlayer}`;
+      document.getElementById("current-player").innerText = `Current Player: ${this.model.currentPlayer}`;
     }
 
     // TODO
