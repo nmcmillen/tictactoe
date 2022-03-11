@@ -66,7 +66,7 @@ class TicTacToe {
 // **VIEW**
 class GameView {
   constructor() {
-    this.cells = document.querySelectorAll(".grid-cell");
+    this.cells = document.getElementsByClassName("game-board");
     this.winMessage = document.getElementById("win-message");
     this.drawMessage = document.getElementById("draw-message");
     this.restartButton = document.getElementById("restart-button");
@@ -77,30 +77,57 @@ class GameView {
   resetBoard = (handleClick) => {
     this.cells.forEach ((cell, i) => {
       cell.innerText = '';
-      // console.dir(cell)
       // removeEventListener("click", handleClick)
-      // console.dir("after", cell)
+      console.dir("after", cell)
     })
     console.log("reset render")
     this.render(handleClick)
   }
 
   init(resetGame) {
+    // @TODO: create element div for the grid here
+
     // TITLE
     let gameTitle = document.createElement("h1");
     gameTitle.classList = "game-title";
     gameTitle.innerText = "TIC TAC TOE";
     document.body.appendChild(gameTitle);
 
-    this.cells = Array.from(this.cells);
+   // GAME BOARD
+    let gameBoard = document.createElement("div")
+    gameBoard.classList = "game-board";
+    document.body.appendChild(gameBoard);
+
+   // PLAYER STATUS
+    let playerStatus = document.createElement("p");
+    playerStatus.classList = "player-status";
+    playerStatus.innerText = "Current Player: ABC";
+    document.body.appendChild(playerStatus);
     
+   // RESET BUTTON
+    let resetButton = document.createElement("button");
+    resetButton.classList = "reset-button";
+    resetButton.innerText = "Restart";
+    document.body.appendChild(resetButton);
+
+
+    this.cells = Array.from(this.cells);
     this.restartButton.addEventListener("click", resetGame);
   }
   
   render(handleClick) {
+   // GRID (not connecting to this.cells)
+   for (let i = 1; i <= 9; i++){
+     let gamegrid = document.createElement("div");
+     gamegrid.classList = "grid-cell";
+     let grid = document.getElementsByClassName("game-board")[0];
+     grid.appendChild(gamegrid);
+    }
+
     // Block of code to place and modify the grid cells with X's and O's
     this.cells.forEach((cell, i) => {
-      cell.addEventListener("click", (e) => handleClick(e, i), { once: true });
+      // only allows cell to be clicked once and turns off eventlistener
+      cell.addEventListener("click", (e) => handleClick(e, i)); //, { once: true });
     }); 
   }
 }
@@ -124,6 +151,7 @@ class GameController {
       this.model.gameBoard = ["","","","","","","","",""]; // these should use setters
       this.model.endGame = false; // these should use setters
       this.view.resetBoard(this.handleClick);
+      this.view.render(this.handleClick)
 
       // this.view.cells.removeEventListener("click", something here)
 
